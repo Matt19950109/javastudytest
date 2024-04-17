@@ -1,6 +1,6 @@
 package login;
 
-import main.Main;
+import main.MainFlame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,20 +36,28 @@ public class LoginFlame extends JFrame {
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "input id " + t1.getText());
+                String id = t1.getText();
+                char[] pwArray = t2.getPassword();
+                String pw = new String(pwArray);  // char[]를 String으로 변환
 
+                if(id.equals("admin") && pw.equals("123")) {
+                    JOptionPane.showMessageDialog(null, "success");
+                    setVisible(false);
+                    MainFlame mainFlame = new MainFlame();
+                } else {
+                    JOptionPane.showMessageDialog(null, "failure");
                 }
-
+            }
         });
 
         p3.add(b1);
         add(p3);
-        setVisible(false);
+        setVisible(true);
     }
 
 
     public static void main(String[] args) {
         //new LoginFlame();
-        Main main = new Main();
+        MainFlame main = new MainFlame();
     }
 }
