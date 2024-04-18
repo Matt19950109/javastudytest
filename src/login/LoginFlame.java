@@ -1,6 +1,7 @@
 package login;
 
 import main.MainFlame;
+import util.DbConn;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginFlame extends JFrame {
+    public static String userId;
 
     public LoginFlame() {
         setTitle("WEAVUS-JAVA");
@@ -40,24 +42,28 @@ public class LoginFlame extends JFrame {
                 char[] pwArray = t2.getPassword();
                 String pw = new String(pwArray);  // char[]를 String으로 변환
 
-                if(id.equals("admin") && pw.equals("123")) {
+                DbConn dbConn = new DbConn();
+                boolean login_success = dbConn.login(id, pw);
+
+                if (login_success) {
                     JOptionPane.showMessageDialog(null, "success");
                     setVisible(false);
-                    MainFlame mainFlame = new MainFlame();
+                    new MainFlame();
                 } else {
                     JOptionPane.showMessageDialog(null, "failure");
                 }
             }
+
         });
 
-        p3.add(b1);
-        add(p3);
+        p2.add(b1);
+        add(p2, BorderLayout.SOUTH);
         setVisible(true);
     }
 
 
     public static void main(String[] args) {
         //new LoginFlame();
-        MainFlame main = new MainFlame();
+        new LoginFlame();
     }
 }

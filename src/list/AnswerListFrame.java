@@ -1,17 +1,21 @@
 package list;
 
+import main.MainFlame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ListFrame extends JFrame {
+import static javax.swing.JOptionPane.YES_OPTION;
 
-    public ListFrame() {
-        JPanel p = new JPanel(new GridLayout(3, 1));
+public class AnswerListFrame extends JFrame {
+
+    public AnswerListFrame() {
+        JPanel p = new JPanel(new GridLayout(3,1));
 
         JPanel p1 = new JPanel();
-        JTextArea t1 = new JTextArea(10, 30);
+        JTextArea t1 = new JTextArea(10,30);
         t1.append("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n");
         t1.append("1aaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n");
         t1.append("2aaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n");
@@ -27,17 +31,20 @@ public class ListFrame extends JFrame {
         p.add(p1);
 
         setTitle("楽しいJAVA-LIST(1/10)");
-        setSize(400, 500);
+        setSize(400,500);
         setLocationRelativeTo(null);
 
-        JPanel p2 = new JPanel(new SpringLayout());
+        JPanel p2 = new JPanel(new GridLayout(2,1));
+
         JPanel p2_1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
         // 選択肢数
         JRadioButton[] radio = new JRadioButton[4];
         radio[0] = new JRadioButton("aaa");
         radio[1] = new JRadioButton("bbb");
         radio[2] = new JRadioButton("ccc");
-        radio[3] = new JRadioButton("ccc");
+        radio[3] = new JRadioButton("ddd");
+
+        radio[2].setSelected(true);
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(radio[0]);
@@ -49,7 +56,18 @@ public class ListFrame extends JFrame {
         p2_1.add(radio[1]);
         p2_1.add(radio[2]);
         p2_1.add(radio[3]);
-        p.add(p2_1);
+
+        JPanel p2_2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JLabel l1 = new JLabel("解答：aaa");
+        p2_2.add(l1);
+
+
+        p2.add(p2_1);
+        p2.add(p2_2);
+
+
+
+        p.add(p2);
 
         JPanel p3 = new JPanel(new GridLayout(1,3));
         JButton b1 = new JButton("前");
@@ -77,6 +95,6 @@ public class ListFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        new ListFrame();
+        new AnswerListFrame();
     }
 }
