@@ -1,7 +1,7 @@
 package main;
 
-import list.AnswerListFrame;
-import list.ListFrame;
+import question.AnswerListFrame;
+import question.ListFrame;
 import login.LoginFrame;
 
 import javax.swing.*;
