@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginFrame extends JFrame {
 
@@ -80,7 +82,14 @@ public class LoginFrame extends JFrame {
         JPanel forgetPanel = new JPanel();
         JLabel forgetPw = new JLabel("パスワードを忘れた場合");
         forgetPw.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        forgetPw.addMouseListener()
+        forgetPw.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                setEnabled(false);
+                new PwHintFrame();
+            }
+        });
 
         forgetPanel.add(forgetPw);
         p2.add(forgetPanel);

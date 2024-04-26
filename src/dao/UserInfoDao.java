@@ -117,6 +117,31 @@ public class UserInfoDao {
 
     }
 
+    public UserInfoDto checkPasswordHintUser(String id){
+        Connection conn = getConn();
+
+        String sql = "SELECT * FROM userinfo where id=?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,id);
+            ResultSet rs = ps.executeQuery();
+
+            UserInfoDto userInfoDto = new UserInfoDto();
+
+            while(rs.next()){
+                userInfoDto.setId(rs.getString("id"));
+                userInfoDto.setPw(rs.getString("pw"));
+                userInfoDto.setName(rs.getString("name"));
+                userInfoDto.setAuth(rs.getInt("auth"));
+            }
+
+            return userInfoDto;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 
 }
