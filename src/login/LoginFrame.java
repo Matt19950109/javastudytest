@@ -1,5 +1,8 @@
 package login;
 
+import admin.AdminMainFrame;
+import dao.UserInfoDao;
+import dto.UserInfoDto;
 import main.MainFrame;
 import util.DbConn;
 
@@ -38,13 +41,33 @@ public class LoginFrame extends JFrame {
                 char[] pwArray = t2.getPassword();
                 String pw = new String(pwArray);  // char[]를 String으로 변환
 
-                DbConn dbConn = new DbConn();
-                boolean login_success = dbConn.login(id, pw);
+                UserInfoDao userInfoDao = new UserInfoDao();
+                boolean login_success = userInfoDao.login(id, pw);
+                UserInfoDto userInfoDto = userInfoDao.checkAuthUser(id, pw);
 
                 if(login_success) {
-                    JOptionPane.showMessageDialog(null, "success");
-                    setVisible(false);
-                    new MainFrame();
+                    //管理者の有無で表示画面を変更
+                    if(userInfoDto.getAuth() == 1){
+                        JOptionPane.showMessageDialog(null, "success");
+
+                        //初期パスワードの条件変更
+                        if(userInfoDto.getPw().equals("weavus")){
+                            JOptionPane.showMessageDialog(null, "パスワードを変更してください");
+                            setVisible(false);
+
+                            //weavusパスワードのユーザーを取得
+                            new LoginCheckFrame();
+
+                        } else {
+                            setVisible(false);
+                            new MainFrame();
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "管理者ですね");
+                        setVisible(false);
+                        new AdminMainFrame();
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "failure");
                 }
@@ -53,6 +76,14 @@ public class LoginFrame extends JFrame {
 
         p2.add(b1);
         add(p2, BorderLayout.SOUTH);
+
+        JPanel forgetPanel = new JPanel();
+        JLabel forgetPw = new JLabel("パスワードを忘れた場合");
+        forgetPw.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        forgetPw.addMouseListener()
+
+        forgetPanel.add(forgetPw);
+        p2.add(forgetPanel);
 
         // 最後の行に置くこと
         setVisible(true);

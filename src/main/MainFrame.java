@@ -1,15 +1,22 @@
 package main;
 
-import question.AnswerListFrame;
-import question.ListFrame;
+import list.CategoryListFrame;
 import login.LoginFrame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainFrame extends JFrame {
+
+    public static Map<Integer, Integer> myAnswerMap = new HashMap<>();
+    public static Map<Integer, Integer> dbAnswerMap = new HashMap<>();
+
+    public static int count = 1;
+
 
     public MainFrame() {
         setTitle("楽しいJAVA-MAIN");
@@ -23,7 +30,10 @@ public class MainFrame extends JFrame {
         p1.add(l1);
 
         JPanel p2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel l2 = new JLabel("進捗率(2/5) : 40%");
+
+        double a = myAnswerMap.size();
+        JLabel l2 = new JLabel("進捗率" + Math.round(a/count*100) + "%");
+        System.out.println(a/count*100);
         p2.add(l2);
 
         JButton b1 = new JButton("問題リスト");
@@ -31,15 +41,15 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new ListFrame();
+                new CategoryListFrame(0);
             }
         });
         JButton b2 = new JButton("履歴");
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setEnabled(false);
-                new AnswerListFrame(MainFrame.this);
+                setVisible(false);
+                new CategoryListFrame(1);
             }
         });
         p2.add(b1);
