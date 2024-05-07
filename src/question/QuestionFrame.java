@@ -123,6 +123,7 @@ public class QuestionFrame extends JFrame {
                 }
 
                 JOptionPane.showMessageDialog(null, "お疲れ様です。メイン画面に戻ります。");
+                MainFrame.count = questionDtoList.size();
                 setVisible(false);
                 new MainFrame();
             }

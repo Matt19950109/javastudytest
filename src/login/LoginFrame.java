@@ -86,7 +86,7 @@ public class LoginFrame extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                setEnabled(false);
+                setVisible(false);
                 new PwHintFrame();
             }
         });

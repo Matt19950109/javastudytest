@@ -27,10 +27,29 @@ public class PwHintFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String id = t1.getText();
+                String name = t2.getText();
 
                 UserInfoDao userInfoDao = new UserInfoDao();
-                UserInfoDto user = userInfoDao.checkPasswordHintUser(id);
-                JOptionPane.showMessageDialog(null, user.getPw());
+                UserInfoDto user = userInfoDao.checkPasswordHintUser(id, name);
+                String input = user.getPw();
+
+                //取得した文字列の最初と最後の一文字以外をアスタリスクに変換
+                char firstChar = input.charAt(0);
+                char lastChar = input.charAt(input.length()-1);
+                String convAstalisk = input.substring(1,input.length() - 1).replaceAll(".","*");
+
+                String output = firstChar + convAstalisk + lastChar;
+
+                JOptionPane.showMessageDialog(null, output);
+            }
+        });
+
+        JButton b2 = new JButton("戻る");
+        b2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new LoginFrame();
             }
         });
 
@@ -39,6 +58,7 @@ public class PwHintFrame extends JFrame {
         p1.add(l2);
         p1.add(t2);
         p1.add(b1);
+        p1.add(b2);
 
         add(p1);
 

@@ -117,14 +117,15 @@ public class UserInfoDao {
 
     }
 
-    public UserInfoDto checkPasswordHintUser(String id){
+    public UserInfoDto checkPasswordHintUser(String id, String name){
         Connection conn = getConn();
 
-        String sql = "SELECT * FROM userinfo where id=?";
+        String sql = "SELECT * FROM userinfo where id=? AND name=?";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,id);
+            ps.setString(2,name);
             ResultSet rs = ps.executeQuery();
 
             UserInfoDto userInfoDto = new UserInfoDto();

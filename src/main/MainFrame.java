@@ -32,6 +32,7 @@ public class MainFrame extends JFrame {
         JPanel p2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         double a = myAnswerMap.size();
+
         JLabel l2 = new JLabel("進捗率" + Math.round(a/count*100) + "%");
         System.out.println(a/count*100);
         p2.add(l2);
