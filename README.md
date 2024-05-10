@@ -42,4 +42,7 @@ javaのGUIフレームワークswingを用いた問題解答ツール
 
 
 # 画面遷移図
+[![Image from Gyazo](https://i.gyazo.com/02c82794352dcfd2aabc739c0ab59a3f.png)](https://gyazo.com/02c82794352dcfd2aabc739c0ab59a3f)
 
+# これから実装予定
+- 管理者権限に問題作成と編集を可能にする機能の付与
